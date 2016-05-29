@@ -5,14 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.CircleMapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -25,6 +24,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.isaias.robotgame.Constants;
 import com.isaias.robotgame.RobotGame;
+import com.isaias.robotgame.inputs.InputHandrer;
 import com.isaias.robotgame.objects.Background;
 import com.isaias.robotgame.objects.Hud;
 import com.isaias.robotgame.objects.Robo;
@@ -42,7 +42,10 @@ public class Play implements Screen{
     private Hud hud;
 
     private RobotGame game;
-    private Robo robo;
+    public Robo robo;
+
+    //handle user inputs
+    private InputHandrer input;
 
     //BOX2D
     private World mundo;
@@ -59,6 +62,9 @@ public class Play implements Screen{
         //tiled
         tilemap = new TmxMapLoader().load("tilled.tmx");
         tmr = new OrthogonalTiledMapRenderer(tilemap, 1 / Constants.PPM);
+
+        Gdx.input.setInputProcessor(new GestureDetector( input = new InputHandrer(this)));
+
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -79,7 +85,7 @@ public class Play implements Screen{
             shape.setAsBox((rect.getWidth() / 2) / Constants.PPM, (rect.getHeight() / 2) / Constants.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
-            Gdx.app.log(RobotGame.TAG, "rect " + rect.x);
+            //Gdx.app.log(RobotGame.TAG, "rect " + rect.x);
 
         }
 
@@ -98,7 +104,7 @@ public class Play implements Screen{
             fdef.shape = circleShape;
             body.createFixture(fdef);
 
-            Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
+            //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
 
         }
 
@@ -113,16 +119,10 @@ public class Play implements Screen{
         hud = new Hud(Constants.bs);
     }
     public void InputHandler(){
-        if(Gdx.input.isTouched() && robo.getVelocityY() < 0.5){
-            robo.body.applyLinearImpulse(new Vector2(0, 4f), robo.body.getWorldCenter(), true);
-            robo.setState("JUMPING");
-        }
-
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && robo.getVelocityY() <  0.5  ){
-            robo.body.applyLinearImpulse(new Vector2(0, 4f), robo.body.getWorldCenter(), true);
-            robo.setState("JUMPING");
-        }
+        //if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && robo.getVelocityY() <  0.5  ){
+        //    robo.body.applyLinearImpulse(new Vector2(0, 4f), robo.body.getWorldCenter(), true);
+         //   robo.setState("JUMPING");
+        //}
 
 
          if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){

@@ -121,8 +121,8 @@ public class Robo{
             );
 
         }
-        Gdx.app.log(RobotGame.TAG, "x: " + body.getPosition().x);
-        Gdx.app.log(RobotGame.TAG, "y: " + body.getPosition().y);
+        //Gdx.app.log(RobotGame.TAG, "x: " + body.getPosition().x);
+        //Gdx.app.log(RobotGame.TAG, "y: " + body.getPosition().y);
     }
 
     public void update(float dt){
