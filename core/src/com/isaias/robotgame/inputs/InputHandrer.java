@@ -1,7 +1,6 @@
 package com.isaias.robotgame.inputs;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.isaias.robotgame.RobotGame;
@@ -9,10 +8,12 @@ import com.isaias.robotgame.Screens.Play;
 
 /**
  * Created by casa on 5/29/2016.
+ * Classe para lidar com Interaçõõs para Mobole
  */
 public class InputHandrer implements GestureDetector.GestureListener {
 
     private Play screen;
+
     public InputHandrer(Play screen){
         this.screen = screen;
     }

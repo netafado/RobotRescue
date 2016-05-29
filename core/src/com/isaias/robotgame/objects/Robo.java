@@ -1,20 +1,17 @@
 package com.isaias.robotgame.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.isaias.robotgame.Constants;
-import com.isaias.robotgame.RobotGame;
 
 /**
  * Created by casa on 5/25/2016.
@@ -28,9 +25,6 @@ public class Robo{
     private State previosState;
     private float x, y;
     private float dx, dy;
-
-    private Texture texture;
-    private Sprite sp;
 
     private TextureAtlas roboAtlas;
     private Animation animation;
@@ -57,10 +51,6 @@ public class Robo{
         isRight = true;
         x = body.getPosition().x - 25;
         y =  body.getPosition().y - 33;
-        texture = new Texture(Gdx.files.internal("robot.png"));
-        sp = new Sprite(texture);
-        sp.setPosition(50 / Constants.PPM, 200 / Constants.PPM);
-        sp.setBounds(0,0, 55 / Constants.PPM, 67 / Constants.PPM);
 
         roboAtlas = new TextureAtlas(Gdx.files.internal("robot-sprite.txt"));
         animation = new Animation(1/24f, roboAtlas.getRegions());
@@ -77,14 +67,12 @@ public class Robo{
         bdef.position.set(200 / Constants.PPM, 200  / Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         body = mundo.createBody(bdef);
+
         FixtureDef fixDef = new FixtureDef();
-
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(25 / Constants.PPM, 35 / Constants.PPM);
+        CircleShape shape = new CircleShape();
+        shape.setRadius(28/Constants.PPM);
 
         fixDef.shape = shape;
-
         fixDef.shape = shape;
         body.createFixture(fixDef);
     }
@@ -121,8 +109,7 @@ public class Robo{
             );
 
         }
-        //Gdx.app.log(RobotGame.TAG, "x: " + body.getPosition().x);
-        //Gdx.app.log(RobotGame.TAG, "y: " + body.getPosition().y);
+
     }
 
     public void update(float dt){
@@ -134,9 +121,7 @@ public class Robo{
 
     }
 
-    public float getX(){
-        return sp.getX();
-    }
+
 
     public void setIsRight(boolean diretion){
         this.isRight = diretion;

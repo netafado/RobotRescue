@@ -28,6 +28,8 @@ import com.isaias.robotgame.inputs.InputHandrer;
 import com.isaias.robotgame.objects.Background;
 import com.isaias.robotgame.objects.Hud;
 import com.isaias.robotgame.objects.Robo;
+import com.isaias.robotgame.objects.TiledMapCreatorBox2d;
+import com.isaias.robotgame.objects.inimigos.Cortador;
 
 
 /**
@@ -37,7 +39,7 @@ public class Play implements Screen{
 
     private TiledMap tilemap;
     private OrthogonalTiledMapRenderer tmr;
-    private ShapeRenderer render;
+    private TiledMapCreatorBox2d tileAndBox2d;
     private Background background;
     private Hud hud;
 
@@ -46,6 +48,8 @@ public class Play implements Screen{
 
     //handle user inputs
     private InputHandrer input;
+
+    private Cortador cortador;
 
     //BOX2D
     private World mundo;
@@ -63,50 +67,14 @@ public class Play implements Screen{
         tilemap = new TmxMapLoader().load("tilled.tmx");
         tmr = new OrthogonalTiledMapRenderer(tilemap, 1 / Constants.PPM);
 
+        tileAndBox2d = new TiledMapCreatorBox2d(mundo, tilemap);
+
         Gdx.input.setInputProcessor(new GestureDetector( input = new InputHandrer(this)));
 
 
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        CircleShape circleShape = new CircleShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
-
-       // body = mundo.createBody(bdef);
-        for(MapObject object : tilemap.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM,
-                               (rect.getY() + rect.getHeight() / 2)/ Constants.PPM);
-
-            body = mundo.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth() / 2) / Constants.PPM, (rect.getHeight() / 2) / Constants.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-            //Gdx.app.log(RobotGame.TAG, "rect " + rect.x);
-
-        }
 
 
 
-        // body = mundo.createBody(bdef);
-        for(MapObject object : tilemap.getLayers().get(3).getObjects().getByType(EllipseMapObject.class) ){
-            Ellipse circle = ((EllipseMapObject) object).getEllipse();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((circle.x + circle.width / 2) / Constants.PPM, (circle.y  + circle.height / 2) / Constants.PPM);
-
-            body = mundo.createBody(bdef);
-
-            circleShape.setRadius((circle.width / 2) / Constants.PPM);
-            fdef.shape = circleShape;
-            body.createFixture(fdef);
-
-            //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
-
-        }
 
 
     }
@@ -118,11 +86,15 @@ public class Play implements Screen{
         background = new Background();
         hud = new Hud(Constants.bs);
     }
+
+    /**
+     * Input for desktop
+     */
     public void InputHandler(){
-        //if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && robo.getVelocityY() <  0.5  ){
-        //    robo.body.applyLinearImpulse(new Vector2(0, 4f), robo.body.getWorldCenter(), true);
-         //   robo.setState("JUMPING");
-        //}
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && robo.getVelocityY() <  0.5  ){
+          robo.body.applyLinearImpulse(new Vector2(0, 4f), robo.body.getWorldCenter(), true);
+          robo.setState("JUMPING");
+        }
 
 
          if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
@@ -166,6 +138,7 @@ public class Play implements Screen{
         Constants.bs.setProjectionMatrix(Constants.CAM.combined);
         Constants.bs.begin();
         robo.draw( Constants.bs);
+        tileAndBox2d.draw();
         Constants.bs.end();
 
         //render tilepmap
@@ -202,5 +175,10 @@ public class Play implements Screen{
     @Override
     public void dispose() {
         tmr.dispose();
+        b2dr.dispose();
+        mundo.dispose();
+        background.dispose();
+        tileAndBox2d.dispose();
+
     }
 }

@@ -11,7 +11,6 @@ import com.isaias.robotgame.Constants;
  * Created by casa on 5/25/2016.
  */
 public class Background {
-    private Viewport view;
 
     private Texture texture;
     private Sprite sp;
@@ -42,6 +41,12 @@ public class Background {
     public void update(float df, float direction){
         sp.setPosition((-1)*direction / 80f, 0);
         sp2.setPosition((1280 / 100 )+ (-1)*direction / 80f, 0);
+
+    }
+
+    public void dispose(){
+        sp.getTexture().dispose();
+        sp2.getTexture().dispose();
 
     }
 
