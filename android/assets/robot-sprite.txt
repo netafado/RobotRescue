@@ -1,0 +1,74 @@
+robo-sprite.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+robo-sprite0001
+  rotate: false
+  xy: 2, 2
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0002
+  rotate: false
+  xy: 2, 71
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0003
+  rotate: false
+  xy: 2, 140
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0004
+  rotate: false
+  xy: 2, 209
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0005
+  rotate: false
+  xy: 2, 278
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0006
+  rotate: false
+  xy: 2, 347
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0007
+  rotate: false
+  xy: 2, 416
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0008
+  rotate: false
+  xy: 2, 485
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0009
+  rotate: false
+  xy: 2, 554
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite0010
+  rotate: false
+  xy: 2, 623
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,74 @@
+robo-sprite-pulando.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+robo-sprite-pulando0001
+  rotate: false
+  xy: 2, 2
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0002
+  rotate: false
+  xy: 2, 71
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0003
+  rotate: false
+  xy: 2, 140
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0004
+  rotate: false
+  xy: 2, 209
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0005
+  rotate: false
+  xy: 2, 278
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0006
+  rotate: false
+  xy: 2, 347
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0007
+  rotate: false
+  xy: 2, 416
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0008
+  rotate: false
+  xy: 2, 485
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0009
+  rotate: false
+  xy: 2, 554
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0010
+  rotate: false
+  xy: 2, 623
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
