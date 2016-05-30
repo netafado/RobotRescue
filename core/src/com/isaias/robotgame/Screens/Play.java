@@ -29,7 +29,10 @@ import com.isaias.robotgame.objects.Background;
 import com.isaias.robotgame.objects.Hud;
 import com.isaias.robotgame.objects.Robo;
 import com.isaias.robotgame.objects.TiledMapCreatorBox2d;
+import com.isaias.robotgame.objects.Tiro;
 import com.isaias.robotgame.objects.inimigos.Cortador;
+
+import java.util.ArrayList;
 
 
 /**
@@ -43,13 +46,13 @@ public class Play implements Screen{
     private Background background;
     private Hud hud;
 
+    private ArrayList<Tiro> tiros;
+
     private RobotGame game;
     public Robo robo;
 
     //handle user inputs
     private InputHandrer input;
-
-    private Cortador cortador;
 
     //BOX2D
     private World mundo;
@@ -63,6 +66,7 @@ public class Play implements Screen{
         mundo = new World(new Vector2(0, -8), true);
         b2dr = new Box2DDebugRenderer();
 
+        tiros = new ArrayList<Tiro>();
         //tiled
         tilemap = new TmxMapLoader().load("tilled.tmx");
         tmr = new OrthogonalTiledMapRenderer(tilemap, 1 / Constants.PPM);
@@ -70,13 +74,6 @@ public class Play implements Screen{
         tileAndBox2d = new TiledMapCreatorBox2d(mundo, tilemap);
 
         Gdx.input.setInputProcessor(new GestureDetector( input = new InputHandrer(this)));
-
-
-
-
-
-
-
     }
     @Override
     public void show() {
@@ -120,6 +117,9 @@ public class Play implements Screen{
 
         InputHandler();
 
+        for(int i = 0; i < tiros.size(); i++)
+            tiros.get(i).update();
+
         mundo.step(1/60f, 6 , 2);
     }
     @Override
@@ -141,15 +141,23 @@ public class Play implements Screen{
         tileAndBox2d.draw();
         Constants.bs.end();
 
+        for(int i = 0; i < tiros.size(); i++)
+            tiros.get(i).draw();
+
         //render tilepmap
         tmr.render();
         //render BOX2d
-        //b2dr.render(mundo,Constants.CAM.combined);
+        b2dr.render(mundo,Constants.CAM.combined);
+
 
         hud.drawStage();
         update(Gdx.graphics.getDeltaTime());
 
 
+    }
+
+    public void addTiro(){
+        tiros.add(new Tiro(mundo, robo.body.getPosition().x, robo.body.getPosition().y, robo.getIsRight()));
     }
 
     @Override

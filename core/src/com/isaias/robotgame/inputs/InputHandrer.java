@@ -35,8 +35,11 @@ public class InputHandrer implements GestureDetector.GestureListener {
         }
 
         // if the tap occur on the RIGHT side of the screen
-        if(x > Gdx.graphics.getWidth() / 2)
+        if(x > Gdx.graphics.getWidth() / 2){
             Gdx.app.log(RobotGame.TAG, "ATIRA:");
+            screen.addTiro();
+        }
+
 
 
         return false;

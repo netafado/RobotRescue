@@ -126,6 +126,7 @@ public class Robo{
     public void setIsRight(boolean diretion){
         this.isRight = diretion;
     }
+    public boolean getIsRight(){return isRight;};
 
     public float getVelocityX() {
         return body.getLinearVelocity().x;
