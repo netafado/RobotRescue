@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.isaias.robotgame.Constants;
@@ -19,19 +20,24 @@ import com.isaias.robotgame.Constants;
 public class Robo{
     public enum State{
         RUNNING,
-        JUMPING
+        JUMPING,
+        DEAD
     };
     private State currentState;
     private State previosState;
     private float x, y;
     private float dx, dy;
 
+    private Fixture fixture;
     private TextureAtlas roboAtlas;
     private Animation animation;
     private TextureRegion textureRegion;
 
     private TextureAtlas roboAtlasJump;
     private Animation animationJump;
+
+    private TextureAtlas roboAtlasDead;
+    private Animation animationDead;
 
     private float timPassed = 0;
 
@@ -56,8 +62,10 @@ public class Robo{
         animation = new Animation(1/24f, roboAtlas.getRegions());
 
         roboAtlasJump = new TextureAtlas(Gdx.files.internal("robot-sprite-pulando.txt"));
-        animationJump = new Animation(1/6f, roboAtlasJump.getRegions());
+        animationJump = new Animation(1/12f, roboAtlasJump.getRegions());
 
+        roboAtlasDead = new TextureAtlas(Gdx.files.internal("robo-morrendo.txt"));
+        animationDead = new Animation(1/12f, roboAtlasDead.getRegions());
         currentState = State.RUNNING;
 
     }
@@ -73,17 +81,22 @@ public class Robo{
         shape.setRadius(28/Constants.PPM);
 
         fixDef.shape = shape;
-        fixDef.shape = shape;
-        body.createFixture(fixDef);
+        fixture = body.createFixture(fixDef);
+        fixture.setUserData("Robo");
     }
 
     public void draw(Batch batch) {
 
        if(currentState == State.RUNNING) {
             textureRegion = animation.getKeyFrame(timPassed, true);
-        }else if(currentState == State.JUMPING && body.getLinearVelocity().y > 0){
+        }
+       else if(currentState == State.JUMPING && body.getLinearVelocity().y > 0){
             textureRegion = animationJump.getKeyFrame(timPassed, true);
-        }else
+        }
+       else if(currentState == State.DEAD){
+           textureRegion = animationDead.getKeyFrame(timPassed, true);
+           }
+        else
         {
             textureRegion = animation.getKeyFrame(timPassed, true);
         }
@@ -107,6 +120,7 @@ public class Robo{
                     textureRegion.getRegionHeight() / Constants.PPM,
                     -1,1, 0
             );
+
 
         }
 
@@ -144,6 +158,15 @@ public class Robo{
             currentState = State.JUMPING;
         }
 
+        if(s.equals("DEAD")){
+            currentState = State.DEAD;
+        }
+
+    }
+
+    public void dead(){
+        body.setLinearVelocity(0, 0);
+       body.setActive(false);
     }
 
     public void changeRight(){

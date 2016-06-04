@@ -24,11 +24,13 @@ import java.util.Stack;
  */
 public class TiledMapCreatorBox2d {
 
-    private ArrayList<Cortador> cortadores;
+    public static ArrayList<Cortador> cortadores;
 
      public TiledMapCreatorBox2d(World mundo, TiledMap tilemap){
 
-        cortadores = new ArrayList<Cortador>();
+
+
+       cortadores = new ArrayList<Cortador>();
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();

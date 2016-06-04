@@ -31,12 +31,12 @@ public class InputHandrer implements GestureDetector.GestureListener {
                 screen.robo.body.applyLinearImpulse(new Vector2(0, 5f), screen.robo.body.getWorldCenter(), true);
                 screen.robo.setState("JUMPING");
             }
-            Gdx.app.log(RobotGame.TAG, "esquerda:");
+            //Gdx.app.log(RobotGame.TAG, "esquerda:");
         }
 
         // if the tap occur on the RIGHT side of the screen
         if(x > Gdx.graphics.getWidth() / 2){
-            Gdx.app.log(RobotGame.TAG, "ATIRA:");
+            //Gdx.app.log(RobotGame.TAG, "ATIRA:");
             screen.addTiro();
         }
 

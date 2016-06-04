@@ -2,14 +2,12 @@ package com.isaias.robotgame.objects.inimigos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.isaias.robotgame.Constants;
@@ -20,6 +18,7 @@ import com.isaias.robotgame.Constants;
 public class Cortador extends interactiveEnimies {
 
     protected  Ellipse circle;
+    private Fixture fixture;
 
     public Cortador(World mundo, TiledMap map, Ellipse circle) {
         super(mundo, map);
@@ -45,8 +44,8 @@ public class Cortador extends interactiveEnimies {
 
         circleShape.setRadius((circle.width / 2) / Constants.PPM);
         fdef.shape = circleShape;
-        body.createFixture(fdef);
-
+        fixture = body.createFixture(fdef);
+        fixture.setUserData("Cortador");
             //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
     }
 
