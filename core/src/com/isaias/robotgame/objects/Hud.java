@@ -36,7 +36,7 @@ public class Hud extends Thread{
         this.bs = sb;
         this.level = 1;
         this.score = 0;
-        this.time = 150;
+        this.time = 50;
 
         view = new FitViewport(Constants.WIDTH, Constants.HEIGHT, new OrthographicCamera());
 
@@ -50,6 +50,9 @@ public class Hud extends Thread{
         levelLabel = new Label("Level: " + level, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label("Score: "+ time, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Tempo " + time, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel.setFontScale(1.5f);
+        timeLabel.setFontScale(2);
+        scoreLabel.setFontScale(1.5f);
 
 
         table.add(levelLabel).expandX().padTop(10);

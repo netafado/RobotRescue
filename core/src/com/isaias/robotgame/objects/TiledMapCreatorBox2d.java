@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.isaias.robotgame.Constants;
 import com.isaias.robotgame.objects.inimigos.Cortador;
+import com.isaias.robotgame.objects.inimigos.Moedas;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -25,12 +26,14 @@ import java.util.Stack;
 public class TiledMapCreatorBox2d {
 
     public static ArrayList<Cortador> cortadores;
+    public static ArrayList<Moedas> moedas;
 
      public TiledMapCreatorBox2d(World mundo, TiledMap tilemap){
 
 
 
        cortadores = new ArrayList<Cortador>();
+         moedas = new ArrayList<Moedas>();
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -57,7 +60,7 @@ public class TiledMapCreatorBox2d {
 
 
 
-        // body = mundo.createBody(bdef);
+        //CRIA OS CORTADORES
         for(MapObject object : tilemap.getLayers().get(3).getObjects().getByType(EllipseMapObject.class) ){
             Ellipse circle = ((EllipseMapObject) object).getEllipse();
 
@@ -66,17 +69,35 @@ public class TiledMapCreatorBox2d {
             //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
 
         }
+
+         //CRIA AS MOEDAS usando como referencia o tilemap
+         for(MapObject object : tilemap.getLayers().get(5).getObjects().getByType(EllipseMapObject.class) ){
+             Ellipse circle = ((EllipseMapObject) object).getEllipse();
+
+             moedas.add(new Moedas(mundo, tilemap, circle));
+
+             //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
+
+         }
     }
 
     public void draw(){
         for(int i = 0; i < cortadores.size(); i++){
             cortadores.get(i).draw();
         }
+
+        for(int i = 0; i < moedas.size(); i++){
+            moedas.get(i).draw();
+        }
     }
 
     public void dispose(){
         for(int i = 0; i < cortadores.size(); i++){
             cortadores.get(i).dispose();
+        }
+
+        for(int i = 0; i < cortadores.size(); i++){
+            moedas.get(i).dispose();
         }
     }
 }

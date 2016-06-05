@@ -58,8 +58,8 @@ public class Background extends Thread{
 
     public void update(){
         float direction = screen.getRoboX();
-        sp.setPosition((-1)*direction / 80f, 0);
-        sp2.setPosition((1280 / 100 )+ (-1)*direction / 80f, 0);
+        sp.setPosition((-1)*direction / 25, 0);
+        sp2.setPosition((1280 / 100 )+ (-1)*direction / 25, 0);
 
     }
 

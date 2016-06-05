@@ -41,11 +41,11 @@ import java.util.ArrayList;
  * Created by casa on 5/16/2016.
  */
 public class Play implements Screen{
-
+    //Tilemap
     private TiledMap tilemap;
     private OrthogonalTiledMapRenderer tmr;
     private TiledMapCreatorBox2d tileAndBox2d;
-    private Background background;
+
 
     private ArrayList<Tiro> tiros;
 
@@ -54,6 +54,7 @@ public class Play implements Screen{
     //MULT THREADING
     Hud hud;
     private Meteoros meteoros;
+    private Background background;
 
     private RobotGame game;
     public Robo robo;
@@ -92,7 +93,10 @@ public class Play implements Screen{
 
         tileAndBox2d = new TiledMapCreatorBox2d(mundo, tilemap);
         robo = new Robo(mundo);
+
+        //Background tambem faz o update das variaveis em paralelo
         background = new Background(this);
+        background.start();
 
 
         Gdx.input.setInputProcessor(new GestureDetector( input = new InputHandrer(this)));
@@ -184,8 +188,8 @@ public class Play implements Screen{
 
         //render tilepmap
         tmr.render();
-        //render BOX2d
-        b2dr.render(mundo,Constants.CAM.combined);
+        //render BOX2d ajuda no debug
+        //b2dr.render(mundo,Constants.CAM.combined);
 
 
 

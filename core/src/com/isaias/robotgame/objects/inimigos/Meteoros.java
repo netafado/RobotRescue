@@ -52,7 +52,7 @@ public class Meteoros  extends Thread{
             }catch (Exception e){
 
             }
-            Gdx.app.log("Running", "Ok");
+            //Gdx.app.log("Running", "Ok");
         }
 
     }

@@ -1,0 +1,179 @@
+moedas.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+moeda0001
+  rotate: false
+  xy: 2, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0002
+  rotate: false
+  xy: 17, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0003
+  rotate: false
+  xy: 32, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0004
+  rotate: false
+  xy: 47, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0005
+  rotate: false
+  xy: 62, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0006
+  rotate: false
+  xy: 77, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0007
+  rotate: false
+  xy: 92, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0008
+  rotate: false
+  xy: 107, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0009
+  rotate: false
+  xy: 122, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0010
+  rotate: false
+  xy: 137, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0011
+  rotate: false
+  xy: 152, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0012
+  rotate: false
+  xy: 167, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0013
+  rotate: false
+  xy: 182, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0014
+  rotate: false
+  xy: 2, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0015
+  rotate: false
+  xy: 17, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0016
+  rotate: false
+  xy: 32, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0017
+  rotate: false
+  xy: 47, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0018
+  rotate: false
+  xy: 62, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0019
+  rotate: false
+  xy: 77, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0020
+  rotate: false
+  xy: 92, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0021
+  rotate: false
+  xy: 107, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0022
+  rotate: false
+  xy: 122, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0023
+  rotate: false
+  xy: 137, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0024
+  rotate: false
+  xy: 152, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+moeda0025
+  rotate: false
+  xy: 167, 17
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1

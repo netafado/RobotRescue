@@ -72,3 +72,108 @@ robo-sprite-pulando0010
   orig: 55, 67
   offset: 0, 0
   index: -1
+robo-sprite-pulando0011
+  rotate: false
+  xy: 2, 692
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0012
+  rotate: false
+  xy: 2, 761
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0013
+  rotate: false
+  xy: 2, 830
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0014
+  rotate: false
+  xy: 2, 899
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0015
+  rotate: false
+  xy: 2, 968
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0016
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0017
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0018
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0019
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0020
+  rotate: false
+  xy: 2, 968
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0021
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0022
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0023
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0024
+  rotate: false
+  xy: 2, 1037
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1
+robo-sprite-pulando0025
+  rotate: false
+  xy: 2, 968
+  size: 55, 67
+  orig: 55, 67
+  offset: 0, 0
+  index: -1

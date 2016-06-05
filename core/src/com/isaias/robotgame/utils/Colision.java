@@ -29,6 +29,8 @@ public class Colision implements ContactListener {
 
         }
 
+        //Gdx.app.log("A:" + a.getUserData(), " A");
+       // Gdx.app.log("A:" + b.getUserData(), " B");
     }
 
     @Override
