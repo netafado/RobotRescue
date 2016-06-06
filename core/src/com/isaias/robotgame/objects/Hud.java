@@ -81,16 +81,25 @@ public class Hud extends Thread{
 
     @Override
     public void run(){
-        while(screen.getIsRunnuing()){
-            try{
-                Thread.sleep(1000);
-                update();
-            }
-            catch(Exception e){
+        if(screen.getIsRunnuing()){
+            while(screen.getIsRunnuing()){
+                try{
+                    Thread.sleep(1000);
+                    update();
+                }
+                catch(Exception e){
+
+                }
 
             }
 
+        }else{
+            reset();
         }
+
+
+    }
+    public void reset(){
 
     }
 
