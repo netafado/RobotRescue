@@ -36,7 +36,7 @@ public class Hud extends Thread{
         this.bs = sb;
         this.level = 1;
         this.score = 0;
-        this.time = 50;
+        this.time = 80;
 
         view = new FitViewport(Constants.WIDTH, Constants.HEIGHT, new OrthographicCamera());
 
@@ -48,7 +48,7 @@ public class Hud extends Thread{
 
 
         levelLabel = new Label("Level: " + level, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label("Score: "+ time, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label("Score: "+ score, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Tempo " + time, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel.setFontScale(1.5f);
         timeLabel.setFontScale(2);
@@ -74,8 +74,10 @@ public class Hud extends Thread{
     public void update(){
         //Gdx.app.log("HID", "HUD");
         this.time -=1;
-        timeLabel.setText("Time: " + time);
-    }
+    timeLabel.setText("Time: " + time);
+        if(time < 20)
+            timeLabel.setColor(1, 0, 0, 1);// aciona o sinal de final do tempo
+}
 
     @Override
     public void run(){

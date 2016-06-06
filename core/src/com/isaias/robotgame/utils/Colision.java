@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.isaias.robotgame.RobotGame;
 import com.isaias.robotgame.Screens.Play;
+import com.isaias.robotgame.objects.inimigos.Moedas;
+import com.isaias.robotgame.objects.inimigos.interactiveEnimies;
 
 /**
  * Created by casa on 5/29/2016.
@@ -23,14 +25,19 @@ public class Colision implements ContactListener {
     public void beginContact(Contact contact) {
         Fixture a = contact.getFixtureA();
         Fixture b = contact.getFixtureB();
-        if((a.getUserData() == "Robo" && b.getUserData() == "Cortador" ) || (a.getUserData() == "Cortador" && b.getUserData() == "Robo" )){
-            Gdx.app.log(RobotGame.TAG, "Morreu:");
-            screen.robo.setState("DEAD");
+
+        if(a.getUserData() == "Robo" || b.getUserData() == "Robo"){
+            Fixture robo = a.getUserData() == "Robo" ? a : b;
+            Fixture obj = robo.getUserData() == "Robo" ? a : b;
+
+            if(obj.getUserData() instanceof interactiveEnimies){
+                ((interactiveEnimies) obj.getUserData()).onColison();
+
+            }
 
         }
 
-        //Gdx.app.log("A:" + a.getUserData(), " A");
-       // Gdx.app.log("A:" + b.getUserData(), " B");
+
     }
 
     @Override

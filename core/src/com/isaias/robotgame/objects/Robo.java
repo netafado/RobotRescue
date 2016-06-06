@@ -79,6 +79,8 @@ public class Robo{
         FixtureDef fixDef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(28/Constants.PPM);
+        fixDef.filter.categoryBits = Constants.ROBO_BIT;
+        fixDef.filter.maskBits = Constants.DEFAULT_BIT | Constants.CORTADOR_BIT | Constants.MOEDA_BIT;
 
         fixDef.shape = shape;
         fixture = body.createFixture(fixDef);

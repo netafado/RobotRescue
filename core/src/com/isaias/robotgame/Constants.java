@@ -18,4 +18,10 @@ public class Constants {
     public static Viewport viewportfixed;
     public static Viewport viewport;
     public static SpriteBatch bs;
+
+    public static final short DEFAULT_BIT = 1;
+    public static final short ROBO_BIT = 2;
+    public static final short MOEDA_BIT = 4;
+    public static final short CORTADOR_BIT = 8;
+    public static final short DESTROYED_BIT = 16;
 }

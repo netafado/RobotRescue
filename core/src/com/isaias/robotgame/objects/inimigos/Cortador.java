@@ -10,15 +10,16 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 import com.isaias.robotgame.Constants;
 
 /**
  * Created by casa on 5/29/2016.
  */
-public class Cortador extends interactiveEnimies {
+public class Cortador extends interactiveEnimies implements Disposable {
 
     protected  Ellipse circle;
-    private Fixture fixture;
+
 
     public Cortador(World mundo, TiledMap map, Ellipse circle) {
         super(mundo, map);
@@ -26,6 +27,7 @@ public class Cortador extends interactiveEnimies {
         //Animation
         textureAtlas = new TextureAtlas(Gdx.files.internal("cortador.txt"));
         animation = new Animation(1/24f, textureAtlas.getRegions());
+
 
 
 
@@ -61,6 +63,11 @@ public class Cortador extends interactiveEnimies {
                 textureRegion.getRegionHeight() / Constants.PPM,
                 1,1, 0
         );
+    }
+
+    @Override
+    public void onColison() {
+
     }
 
     public void dispose(){

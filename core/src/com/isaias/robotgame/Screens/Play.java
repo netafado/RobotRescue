@@ -3,6 +3,7 @@ package com.isaias.robotgame.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.isaias.robotgame.Constants;
 import com.isaias.robotgame.RobotGame;
 import com.isaias.robotgame.inputs.InputHandrer;
@@ -33,6 +35,7 @@ import com.isaias.robotgame.objects.Tiro;
 import com.isaias.robotgame.objects.inimigos.Cortador;
 import com.isaias.robotgame.objects.inimigos.Meteoros;
 import com.isaias.robotgame.utils.Colision;
+import com.isaias.robotgame.utils.Musics;
 
 import java.util.ArrayList;
 
@@ -46,10 +49,11 @@ public class Play implements Screen{
     private OrthogonalTiledMapRenderer tmr;
     private TiledMapCreatorBox2d tileAndBox2d;
 
-
     private ArrayList<Tiro> tiros;
 
     private boolean isGameRunning;
+
+    private Array<Body> destroy;
 
     //MULT THREADING
     Hud hud;
@@ -62,6 +66,9 @@ public class Play implements Screen{
     //handle user inputs
     private InputHandrer input;
 
+    //musica
+    private Musics music;
+
     //BOX2D
     private World mundo;
     private Box2DDebugRenderer b2dr;
@@ -71,6 +78,8 @@ public class Play implements Screen{
         //Posiona a camra de acordo com sua view
         Constants.CAM.position.x = (Constants.viewport.getScreenWidth() / 2)  / Constants.PPM;
         Constants.CAM.position.y = (Constants.viewport.getScreenHeight() / 2) / Constants.PPM;
+
+        destroy = new Array<Body>();
 
         //cuida dos displays do jogo
         hud = new Hud(this, Constants.bs);
@@ -91,12 +100,19 @@ public class Play implements Screen{
         tilemap = new TmxMapLoader().load("tilled.tmx");
         tmr = new OrthogonalTiledMapRenderer(tilemap, 1 / Constants.PPM);
 
-        tileAndBox2d = new TiledMapCreatorBox2d(mundo, tilemap);
+        tileAndBox2d = new TiledMapCreatorBox2d(mundo, tilemap, this);
+        tileAndBox2d.start();
+
         robo = new Robo(mundo);
 
         //Background tambem faz o update das variaveis em paralelo
         background = new Background(this);
         background.start();
+
+        //Cuida da música
+        music = new Musics();
+        music.start();
+
 
 
         Gdx.input.setInputProcessor(new GestureDetector( input = new InputHandrer(this)));
@@ -155,6 +171,9 @@ public class Play implements Screen{
         }
 
         mundo.step(1/60f, 6 , 2);
+        destroyBody();
+
+
     }
     @Override
     public void render(float delta) {
@@ -248,6 +267,21 @@ public class Play implements Screen{
 
     }
 
+    public void addDestroy(Body body){
+        destroy.add(body);
+    }
+
+    public void destroyBody(){
+
+
+
+
+
+
+
+}
+
+
     public synchronized void setIsRunnuing(boolean isRunnuing){
         this.isGameRunning = isRunnuing;
     }
@@ -263,4 +297,6 @@ public class Play implements Screen{
     public synchronized float deltaTime(){
         return Gdx.graphics.getDeltaTime();
     }
+
+    public Musics getMusics(){return music;}
 }
