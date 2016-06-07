@@ -8,11 +8,14 @@ import com.badlogic.gdx.audio.Sound;
  * Created by casa on 6/5/2016.
  */
 public class Musics extends Thread {
-    private AssetManager manager;
+    public AssetManager manager;
     private Music background;
     private Sound coin;
-
+    private Sound saw;
     public Musics(){
+
+    }
+    public void Musics(){
 
     }
 
@@ -21,6 +24,7 @@ public class Musics extends Thread {
         manager = new AssetManager();
         manager.load("background.mp3", Music.class);
         manager.load("coin.mp3", Sound.class);
+        manager.load("saw.mp3", Sound.class);
         manager.finishLoading();
 
         background = manager.get("background.mp3", Music.class);
@@ -28,14 +32,25 @@ public class Musics extends Thread {
         background.setLooping(true);
 
         coin = manager.get("coin.mp3", Sound.class);
+        saw = manager.get("saw.mp3", Sound.class);
+
+
+
+
+
 
     }
 
-    public void playBackground(){
-
-    }
 
     public void playCoin(){
         coin.play();
+    }
+
+    public void playSaw(){
+        saw.play();
+    }
+
+    public void stopMusic(){
+        background.stop();
     }
 }

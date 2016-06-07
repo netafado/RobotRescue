@@ -82,8 +82,8 @@ public class Moedas extends interactiveEnimies implements Disposable{
     public void onColison() {
         Musics musics = screen.getMusics();
         musics.playCoin();
-        Gdx.app.log("Coin", " ok");
         setCategoryFilter(Constants.DESTROYED_BIT);
+        screen.getHud().addScore();
         isalive =  false;
         if(body != null)
             screen.addDestroy(body);
@@ -94,6 +94,7 @@ public class Moedas extends interactiveEnimies implements Disposable{
     public void dispose(){
         textureAtlas.dispose();
         mundo.destroyBody(body);
+        textureAtlas.dispose();
     }
 
     public boolean getIsAlive()

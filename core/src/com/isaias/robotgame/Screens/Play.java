@@ -3,25 +3,14 @@ package com.isaias.robotgame.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.EllipseMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Ellipse;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.isaias.robotgame.Constants;
@@ -57,7 +46,7 @@ public class Play implements Screen{
 
     //MULT THREADING
     Hud hud;
-    private Meteoros meteoros;
+    //private Meteoros meteoros;
     private Background background;
 
     private RobotGame game;
@@ -92,8 +81,8 @@ public class Play implements Screen{
         b2dr = new Box2DDebugRenderer();
         mundo.setContactListener(new Colision(this));
 
-        meteoros = new Meteoros(this);
-        meteoros.start();
+        //meteoros = new Meteoros(this);
+       // meteoros.start();
 
         tiros = new ArrayList<Tiro>();
         //tiled
@@ -112,6 +101,13 @@ public class Play implements Screen{
         //Cuida da música
         music = new Musics();
         music.start();
+        try{
+            music.join();
+        }catch (Exception e){
+
+        }
+
+
 
 
 
@@ -171,7 +167,22 @@ public class Play implements Screen{
         }
 
         mundo.step(1/60f, 6 , 2);
-        destroyBody();
+
+        // SE GAME OVER
+        if(!isGameRunning){
+            game.setScreen(new GameOver(game));
+            try{
+                background.join();
+                hud.join();
+                tileAndBox2d.join();
+                music.join();
+                music.stopMusic();
+
+            }catch (Exception e){
+                Gdx.app.log("Erro", " Game over dentro do update");
+            }
+            dispose();
+        }
 
 
     }
@@ -195,9 +206,9 @@ public class Play implements Screen{
         robo.draw( Constants.bs);
         tileAndBox2d.draw();
         Constants.bs.end();
-        meteoros.draw();
+        //meteoros.draw();
         hud.drawStage();
-        ;
+
 
         removeTiro();
 
@@ -208,7 +219,7 @@ public class Play implements Screen{
         //render tilepmap
         tmr.render();
         //render BOX2d ajuda no debug
-        //b2dr.render(mundo,Constants.CAM.combined);
+        b2dr.render(mundo,Constants.CAM.combined);
 
 
 
@@ -227,10 +238,11 @@ public class Play implements Screen{
 
     }
     public void addTiro(){
-        tiros.add(new Tiro(mundo, robo.body.getPosition().x, robo.body.getPosition().y, robo.getIsRight()));
+        tiros.add(new Tiro(mundo, getRoboX(), robo.body.getPosition().y, robo.getIsRight()));
     }
 
     public void reset(){
+        //robo.reset();
 
     }
 
@@ -239,7 +251,7 @@ public class Play implements Screen{
         Constants.viewport.update(width, height, true);
         Constants.viewportfixed.update(width, height, true);
         hud.stage.getViewport().update(width, height, true);
-        Meteoros.M_VIEW.update(width, height, true);
+
     }
 
     @Override
@@ -261,9 +273,11 @@ public class Play implements Screen{
     public void dispose() {
         tmr.dispose();
         b2dr.dispose();
-        mundo.dispose();
+        //mundo.dispose();
         background.dispose();
         tileAndBox2d.dispose();
+
+
 
     }
 
@@ -271,15 +285,7 @@ public class Play implements Screen{
         destroy.add(body);
     }
 
-    public void destroyBody(){
-
-
-
-
-
-
-
-}
+    public Hud getHud(){return hud;};
 
 
     public synchronized void setIsRunnuing(boolean isRunnuing){

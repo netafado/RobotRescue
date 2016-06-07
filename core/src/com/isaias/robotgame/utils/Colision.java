@@ -32,6 +32,7 @@ public class Colision implements ContactListener {
 
             if(obj.getUserData() instanceof interactiveEnimies){
                 ((interactiveEnimies) obj.getUserData()).onColison();
+                Gdx.app.log("teste", "obj: " + obj.getUserData());
 
             }
 

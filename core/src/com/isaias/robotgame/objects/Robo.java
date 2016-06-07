@@ -28,6 +28,9 @@ public class Robo{
     private float x, y;
     private float dx, dy;
 
+    // posição inicial
+    private float xI, yI;
+
     private Fixture fixture;
     private TextureAtlas roboAtlas;
     private Animation animation;
@@ -57,6 +60,9 @@ public class Robo{
         isRight = true;
         x = body.getPosition().x - 25;
         y =  body.getPosition().y - 33;
+
+        xI = x;
+        yI = y;
 
         roboAtlas = new TextureAtlas(Gdx.files.internal("robot-sprite.txt"));
         animation = new Animation(1/24f, roboAtlas.getRegions());
@@ -169,6 +175,10 @@ public class Robo{
     public void dead(){
         body.setLinearVelocity(0, 0);
        body.setActive(false);
+    }
+
+    public void reset(){
+        body.setTransform(new Vector2(xI, yI), 0);
     }
 
     public void changeRight(){

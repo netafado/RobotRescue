@@ -73,10 +73,14 @@ public class Hud extends Thread{
 
     public void update(){
         //Gdx.app.log("HID", "HUD");
-        this.time -=1;
+    this.time -=1;
+    scoreLabel.setText("Score: " + getScore());
     timeLabel.setText("Time: " + time);
         if(time < 20)
             timeLabel.setColor(1, 0, 0, 1);// aciona o sinal de final do tempo
+
+        if(time < 0)
+            screen.setIsRunnuing(false);
 }
 
     @Override
@@ -101,6 +105,14 @@ public class Hud extends Thread{
     }
     public void reset(){
 
+    }
+
+    public synchronized void addScore(){
+       score = getScore() + 100;
+    }
+
+    public synchronized int getScore(){
+        return score;
     }
 
 }

@@ -18,6 +18,7 @@ import com.isaias.robotgame.Constants;
 import com.isaias.robotgame.Screens.Play;
 import com.isaias.robotgame.objects.inimigos.Cortador;
 import com.isaias.robotgame.objects.inimigos.Moedas;
+import com.isaias.robotgame.objects.inimigos.Princeso;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -29,6 +30,8 @@ public class TiledMapCreatorBox2d extends Thread {
 
     public static ArrayList<Cortador> cortadores;
     public static ArrayList<Moedas> moedas;
+
+    private Princeso princeso;
 
     private Play screen;
 
@@ -66,7 +69,7 @@ public class TiledMapCreatorBox2d extends Thread {
         for(MapObject object : tilemap.getLayers().get(3).getObjects().getByType(EllipseMapObject.class) ){
             Ellipse circle = ((EllipseMapObject) object).getEllipse();
 
-            cortadores.add(new Cortador(mundo, tilemap, circle));
+            cortadores.add(new Cortador(mundo, tilemap, circle, screen));
 
             //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
 
@@ -81,6 +84,16 @@ public class TiledMapCreatorBox2d extends Thread {
              //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
 
          }
+
+         //Princeso
+         for(MapObject object : tilemap.getLayers().get(4).getObjects().getByType(EllipseMapObject.class) ){
+             Ellipse circle = ((EllipseMapObject) object).getEllipse();
+
+             princeso = new Princeso(mundo, tilemap, circle, screen);
+
+             //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
+
+         }
     }
     // limpa as array list
     public void run(){
@@ -88,9 +101,9 @@ public class TiledMapCreatorBox2d extends Thread {
             try{
                 Thread.sleep(1000/60);
             }catch (Exception e){
-
+                Gdx.app.log("Erro dentro: ", "TileMapCreator" + toString());
             }
-            //Gdx.app.log("thread", "thread");
+
             update();
         }
 
@@ -104,6 +117,8 @@ public class TiledMapCreatorBox2d extends Thread {
         for(int i = 0; i < moedas.size(); i++){
             moedas.get(i).draw();
         }
+
+        princeso.draw();
     }
 
     public void update(){
@@ -119,7 +134,7 @@ public class TiledMapCreatorBox2d extends Thread {
         }
 
         for(int i = 0; i < cortadores.size(); i++){
-            moedas.get(i).dispose();
+            //moedas.get(i).dispose();
         }
     }
 }

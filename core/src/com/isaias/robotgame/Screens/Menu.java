@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.isaias.robotgame.Constants;
 import com.isaias.robotgame.RobotGame;
 
@@ -20,6 +23,9 @@ public class Menu implements Screen, InputProcessor{
     private Texture btnInit;
     private InputProcessor input;
 
+    private OrthographicCamera cam;
+    private Viewport view;
+
     private Sprite spBackground;
     private Sprite spBackground1;
     private RobotGame game;
@@ -28,6 +34,10 @@ public class Menu implements Screen, InputProcessor{
     }
     @Override
     public void show() {
+
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false, Gdx.graphics.getWidth(),  Gdx.graphics.getWidth());
+        view = new FitViewport( Gdx.graphics.getWidth(),  Gdx.graphics.getWidth(), cam);
 
         background = new Texture(Gdx.files.internal("fun1.jpg"));
 
@@ -44,11 +54,12 @@ public class Menu implements Screen, InputProcessor{
         Gdx.gl.glClearColor(0, 0.3f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        Constants.bs.setProjectionMatrix(Constants.CAM.combined);
-        Constants.viewport.apply();
+        Constants.bs.setProjectionMatrix(cam.combined);
+        view.apply();
 
         Constants.bs.begin();
         //renderiza tudo aqui
+        spBackground.setBounds(0, 0, Constants.WIDTH, Constants.HEIGHT);
         spBackground.draw(Constants.bs);
         Constants.bs.draw(logo, Gdx.graphics.getWidth() / 2 - logo.getWidth() / 2, Gdx.graphics.getHeight() / 2 - logo.getHeight() * 0.2f);
         Constants.bs.draw(btnInit, Gdx.graphics.getWidth() / 2 - btnInit.getWidth() / 2, Gdx.graphics.getHeight() * 0.2f);
@@ -58,7 +69,7 @@ public class Menu implements Screen, InputProcessor{
 
     @Override
     public void resize(int width, int height) {
-        Constants.viewport.update(width, height);
+        view.update(width, height);
     }
 
     public void play(){
