@@ -15,7 +15,8 @@ import com.isaias.robotgame.Screens.Play;
 
 
 /**
- * Created by casa on 5/26/2016.
+ * Created by Isaias on 5/26/2016.
+ * Classe responveal pelo score, level e tempo do jogo
  */
 public class Hud extends Thread{
     public Stage stage;
@@ -31,6 +32,7 @@ public class Hud extends Thread{
     Label scoreLabel;
     Label timeLabel;
     private SpriteBatch bs;
+
     public Hud(Play screen, SpriteBatch sb){
         this.screen = screen;
         this.bs = sb;
@@ -46,7 +48,7 @@ public class Hud extends Thread{
         table.top();
         table.setFillParent(true);
 
-
+        //labels
         levelLabel = new Label("Level: " + level, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label("Score: "+ score, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Tempo " + time, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -72,12 +74,12 @@ public class Hud extends Thread{
     }
 
     public void update(){
-        //Gdx.app.log("HID", "HUD");
+    //diminui o tempo a cada um segundo
     this.time -=1;
     scoreLabel.setText("Score: " + getScore());
     timeLabel.setText("Time: " + time);
         if(time < 20)
-            timeLabel.setColor(1, 0, 0, 1);// aciona o sinal de final do tempo
+            timeLabel.setColor(1, 0, 0, 1);// se o tempo estiver acabando a cor muda para vermelho
 
         if(time < 0)
             screen.setIsRunnuing(false);
@@ -106,7 +108,7 @@ public class Hud extends Thread{
     public void reset(){
 
     }
-
+    //adiciona pontuação ao score
     public synchronized void addScore(){
        score = getScore() + 100;
     }

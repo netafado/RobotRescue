@@ -16,43 +16,46 @@ import com.isaias.robotgame.Screens.Play;
 import com.isaias.robotgame.utils.Musics;
 
 /**
- * Created by casa on 5/29/2016.
+ * Created by Isaias on 5/29/2016.
+ * Classe responsavel por controlar os cortadores a tela
  */
 public class Cortador extends interactiveEnimies implements Disposable {
 
     protected  Ellipse circle;
+    //referencia a Screen Play
     private Play screen;
 
 
     public Cortador(World mundo, TiledMap map, Ellipse circle, Play screen) {
+        //invoca o contrutor pai
         super(mundo, map);
         this.circle = circle;
         this.screen = screen;
-        //Animation
+
+        //animação usando um texture Atlas
         textureAtlas = new TextureAtlas(Gdx.files.internal("cortador.txt"));
+        // seta a animação para 24 frames por segundo
         animation = new Animation(1/24f, textureAtlas.getRegions());
 
-
-
-
+        //define caracteristicas dos corpos para a engine de fispica box2d
         BodyDef bdef = new BodyDef();
         CircleShape circleShape = new CircleShape();
         FixtureDef fdef = new FixtureDef();
-
-
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set((circle.x + circle.width / 2) / Constants.PPM, (circle.y + circle.height / 2) / Constants.PPM);
 
         x = circle.x /Constants.PPM;
         y = circle.y /Constants.PPM;
-
+        //adiciona o corpo ao mundo e quarda uma referencia a ele na variavel
         body = mundo.createBody(bdef);
-
+        //seta o tamanho do carpo
         circleShape.setRadius((circle.width / 2) / Constants.PPM);
         fdef.shape = circleShape;
+
         fixture = body.createFixture(fdef);
+        //para facilitar a detecção de colisão
         fixture.setUserData(this);
-            //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
+
     }
 
     @Override
@@ -69,15 +72,15 @@ public class Cortador extends interactiveEnimies implements Disposable {
         );
     }
 
+    // caso ocorra um colisão esse metodo sera chamado
     @Override
     public void onColison() {
-        Gdx.app.log("Col", "cortador");
         Musics saw = screen.getMusics();
         saw.playSaw();
         screen.setIsRunnuing(false);
 
     }
-
+    // limpa a memória
     public void dispose(){
         textureAtlas.dispose();
         mundo.destroyBody(body);

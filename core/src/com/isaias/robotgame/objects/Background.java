@@ -10,6 +10,8 @@ import com.isaias.robotgame.Screens.Play;
 
 /**
  * Created by casa on 5/25/2016.
+ * Esta classe cuida do imagem de background do jogo
+ * ele faz o update da mesmo em uma thread a parte
  */
 public class Background extends Thread{
 
@@ -57,6 +59,7 @@ public class Background extends Thread{
     }
 
     public void update(){
+        //pega a posição em X do robo e direciona para posicionar o background
         float direction = screen.getRoboX();
         sp.setPosition((-1)*direction / 25, 0);
         sp2.setPosition((1280 / 100 )+ (-1)*direction / 25, 0);

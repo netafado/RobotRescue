@@ -14,7 +14,9 @@ import com.isaias.robotgame.RobotGame;
 import com.isaias.robotgame.Screens.Play;
 
 /**
- * Created by casa on 6/7/2016.
+ * Created by Isaias on 6/7/2016.
+ * Classe para adicionar o Princeso ao jogo
+ * caso haja colisão entre ele eo robo o jogo termina
  */
 public class Princeso extends interactiveEnimies {
 
@@ -41,16 +43,15 @@ public class Princeso extends interactiveEnimies {
         x = circle.x /Constants.PPM;
         y = circle.y /Constants.PPM;
 
+        //definição de como o corpo no box2d
         body = mundo.createBody(bdef);
-
+        //seta o tamanho do corpo
         circleShape.setRadius((circle.width / 3) / Constants.PPM);
         fdef.shape = circleShape;
         fdef.filter.categoryBits = Constants.MOEDA_BIT;
         fixture = body.createFixture(fdef);
+        //para facilitar a detecção de colisão
         fixture.setUserData(this);
-
-        Gdx.app.log(RobotGame.TAG, "Princeso");
-
 
     }
 

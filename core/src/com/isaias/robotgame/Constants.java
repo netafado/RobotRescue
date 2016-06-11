@@ -6,7 +6,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 /**
- * Created by casa on 5/16/2016.
+ * Created by Isaias on 5/16/2016.
+ * Quarda toda as contansts cdo jogo
  */
 public class Constants {
     public static final float WIDTH = 1028;
@@ -19,6 +20,7 @@ public class Constants {
     public static Viewport viewport;
     public static SpriteBatch bs;
 
+    //usado para definir oque define com oque.
     public static final short DEFAULT_BIT = 1;
     public static final short ROBO_BIT = 2;
     public static final short MOEDA_BIT = 4;

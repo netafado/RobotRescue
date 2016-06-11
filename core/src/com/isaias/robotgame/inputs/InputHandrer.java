@@ -7,16 +7,18 @@ import com.isaias.robotgame.RobotGame;
 import com.isaias.robotgame.Screens.Play;
 
 /**
- * Created by casa on 5/29/2016.
+ * Created by Isaias  on 5/29/2016.
  * Classe para lidar com Interaçõõs para Mobole
  */
 public class InputHandrer implements GestureDetector.GestureListener {
 
+    //faz referencia para a Play screen
     private Play screen;
 
     public InputHandrer(Play screen){
         this.screen = screen;
-    }
+    }//construtor
+
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
 
@@ -25,23 +27,21 @@ public class InputHandrer implements GestureDetector.GestureListener {
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        // if the tap occur on the LEFT side of the screen
+        // se o toque na tela ocorrer na metade esquerda da tela
         if(x < Gdx.graphics.getWidth() / 2){
+            // e se a velocidade em y for menor que 1, será adicionado um
+            // impulso linear no eixo y ao robo e mudará o estado do robo para "jumping"
             if(screen.robo.getVelocityY() <  1) {
                 screen.robo.body.applyLinearImpulse(new Vector2(0, 5f), screen.robo.body.getWorldCenter(), true);
                 screen.robo.setState("JUMPING");
             }
-            //Gdx.app.log(RobotGame.TAG, "esquerda:");
+
         }
 
-        // if the tap occur on the RIGHT side of the screen
+        // se o toque ocorrer do lado direito sera adicionado um tiro
         if(x > Gdx.graphics.getWidth() / 2){
-            //Gdx.app.log(RobotGame.TAG, "ATIRA:");
             screen.addTiro();
         }
-
-
-
         return false;
     }
 
@@ -50,6 +50,8 @@ public class InputHandrer implements GestureDetector.GestureListener {
         return false;
     }
 
+
+    // toque e arraste o dedo para o lado esquerdo, isso fará o robo ir para a esquerda caso contrario irá para a direita
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
 
@@ -70,26 +72,14 @@ public class InputHandrer implements GestureDetector.GestureListener {
     }
 
     @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY) {
-        Gdx.app.log(RobotGame.TAG, "pan: " +x);
-        return false;
-    }
+    public boolean pan(float x, float y, float deltaX, float deltaY) {return false; }
 
     @Override
-    public boolean panStop(float x, float y, int pointer, int button) {
-        Gdx.app.log(RobotGame.TAG, "panStop: " +x);
-        return false;
-    }
+    public boolean panStop(float x, float y, int pointer, int button) {return false; }
 
     @Override
-    public boolean zoom(float initialDistance, float distance) {
-        Gdx.app.log(RobotGame.TAG, "panStop: " +initialDistance);
-        return false;
-    }
+    public boolean zoom(float initialDistance, float distance) { return false;}
 
     @Override
-    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-        Gdx.app.log(RobotGame.TAG, "pinch: " +initialPointer1);
-        return false;
-    }
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {return false;}
 }

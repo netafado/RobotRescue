@@ -12,7 +12,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 
 /**
- * Created by casa on 5/29/2016.
+ * Created by Isaias on 5/29/2016.
+ * Classe abstrata para interação entre os objetos do jogo
  */
 public abstract class interactiveEnimies {
     protected World mundo;

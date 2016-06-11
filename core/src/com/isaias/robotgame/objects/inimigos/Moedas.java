@@ -17,13 +17,14 @@ import com.isaias.robotgame.Screens.Play;
 import com.isaias.robotgame.utils.Musics;
 
 /**
- * Created by casa on 6/5/2016.
+ * Created by Isaas on 6/5/2016.
+ * Classe para controlar as Moedas do jogo
  */
 public class Moedas extends interactiveEnimies implements Disposable{
 
     protected Ellipse circle;
 
-    //sera usado para limpar da tela por outra thread
+    //sera usado para limpar da tela por outra thread(TiledMapCreator)
     public boolean isalive;
     private Play screen;
 
@@ -31,25 +32,24 @@ public class Moedas extends interactiveEnimies implements Disposable{
         super(mundo, map);
         this.circle = circle;
         this.screen = screen;
-        //Animation
+
+        //animação
         textureAtlas = new TextureAtlas(Gdx.files.internal("moedas.txt"));
         animation = new Animation(1/24f, textureAtlas.getRegions());
 
         isalive = true;
 
+        //definição de como o corpo no box2d
         BodyDef bdef = new BodyDef();
         CircleShape circleShape = new CircleShape();
         FixtureDef fdef = new FixtureDef();
-
-
-
-
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set((circle.x + circle.width / 2) / Constants.PPM, (circle.y + circle.height / 2) / Constants.PPM);
-
+        // quardo a posição x do circulo para usar na animação
         x = circle.x /Constants.PPM;
         y = circle.y /Constants.PPM;
 
+        //adiciona o corpo ao mundo e quarda uma referencia a ele na variavel
         body = mundo.createBody(bdef);
 
         circleShape.setRadius((circle.width / 2) / Constants.PPM);
@@ -60,10 +60,11 @@ public class Moedas extends interactiveEnimies implements Disposable{
         fixture.setSensor(true);
         fixture.setUserData(this);
 
-        //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
 
 
     }
+
+    //controla a posição do desenho de acordo com mundo(box2d)
     @Override
     public void draw() {
         timer += Gdx.graphics.getDeltaTime();
@@ -78,19 +79,25 @@ public class Moedas extends interactiveEnimies implements Disposable{
         );
     }
 
+    //caso ocorra colisão
     @Override
     public void onColison() {
+        //toca a musica da moeda
         Musics musics = screen.getMusics();
         musics.playCoin();
+
+        //seta para que não haja mais colisão com a muda
         setCategoryFilter(Constants.DESTROYED_BIT);
         screen.getHud().addScore();
+
         isalive =  false;
+        //retira o corpo do mundo
         if(body != null)
             screen.addDestroy(body);
 
 
     }
-
+    //limpa memória
     public void dispose(){
         textureAtlas.dispose();
         mundo.destroyBody(body);

@@ -15,18 +15,20 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.isaias.robotgame.Constants;
 
 /**
- * Created by casa on 5/25/2016.
+ * Created by Isaias on 5/25/2016.
+ * Cuida do Robo sua movimentação e animações;
  */
 public class Robo{
+
+    // seta possiveis estados para o robo
     public enum State{
         RUNNING,
         JUMPING,
         DEAD
     };
     private State currentState;
-    private State previosState;
     private float x, y;
-    private float dx, dy;
+    private float dx;
 
     // posição inicial
     private float xI, yI;
@@ -63,19 +65,20 @@ public class Robo{
 
         xI = x;
         yI = y;
-
+        //animação com ele correndo
         roboAtlas = new TextureAtlas(Gdx.files.internal("robot-sprite.txt"));
         animation = new Animation(1/24f, roboAtlas.getRegions());
-
+        //animação com ele pulando
         roboAtlasJump = new TextureAtlas(Gdx.files.internal("robot-sprite-pulando.txt"));
         animationJump = new Animation(1/12f, roboAtlasJump.getRegions());
-
+        //animação com ele morrendo
         roboAtlasDead = new TextureAtlas(Gdx.files.internal("robo-morrendo.txt"));
         animationDead = new Animation(1/12f, roboAtlasDead.getRegions());
+
         currentState = State.RUNNING;
 
     }
-
+    // definição do corpo do robo no box2d
     public void defineRobo(){
         BodyDef bdef = new BodyDef();
         bdef.position.set(200 / Constants.PPM, 200  / Constants.PPM);
@@ -86,15 +89,16 @@ public class Robo{
         CircleShape shape = new CircleShape();
         shape.setRadius(28/Constants.PPM);
         fixDef.filter.categoryBits = Constants.ROBO_BIT;
+        //objetos que o robo pode colider
         fixDef.filter.maskBits = Constants.DEFAULT_BIT | Constants.CORTADOR_BIT | Constants.MOEDA_BIT;
-
+        //tamanho do corpo e userData para colisão
         fixDef.shape = shape;
         fixture = body.createFixture(fixDef);
         fixture.setUserData("Robo");
     }
 
     public void draw(Batch batch) {
-
+        //seta a animação de acordo com o estado do robo
        if(currentState == State.RUNNING) {
             textureRegion = animation.getKeyFrame(timPassed, true);
         }
@@ -137,14 +141,14 @@ public class Robo{
     public void update(float dt){
         x = body.getPosition().x - ( 60 / Constants.PPM) /2;
         y = body.getPosition().y - ( 72 / Constants.PPM) /2;
-
+        // robo sempre correndo em uma velocidade
         if(getVelocityX() <= 2f && getVelocityX() >= -2)
             body.applyLinearImpulse(new Vector2(dx, 0), body.getWorldCenter(), true);
 
     }
 
 
-
+    // vê  a direção do robo
     public void setIsRight(boolean diretion){
         this.isRight = diretion;
     }
@@ -170,11 +174,6 @@ public class Robo{
             currentState = State.DEAD;
         }
 
-    }
-
-    public void dead(){
-        body.setLinearVelocity(0, 0);
-       body.setActive(false);
     }
 
     public void reset(){

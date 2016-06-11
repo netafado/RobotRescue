@@ -5,7 +5,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
 /**
- * Created by casa on 6/5/2016.
+ * Created by Isaias on 6/5/2016.
+ * Classe responsabel pela Musicas do jogo
  */
 public class Musics extends Thread {
     public AssetManager manager;
@@ -20,7 +21,7 @@ public class Musics extends Thread {
     }
 
     public void run(){
-        // carrega os arquivos em outra threead;
+        // carrega os arquivos em outra thread;
         manager = new AssetManager();
         manager.load("background.mp3", Music.class);
         manager.load("coin.mp3", Sound.class);

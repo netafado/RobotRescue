@@ -13,6 +13,7 @@ import com.isaias.robotgame.Constants;
 
 /**
  * Created by casa on 5/29/2016.
+ * Controle do tiro dentro do jogo
  */
 public class Tiro {
 

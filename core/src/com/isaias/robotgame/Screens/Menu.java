@@ -13,7 +13,8 @@ import com.isaias.robotgame.Constants;
 import com.isaias.robotgame.RobotGame;
 
 /**
- * Created by casa on 5/16/2016.
+ * Created by Isaias on 5/16/2016.
+ * Tela do Menu
  */
 public class Menu implements Screen, InputProcessor{
 

@@ -24,13 +24,18 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 /**
- * Created by casa on 5/29/2016.
+ * Created by Isaias on 5/29/2016.
+ * Classe responsavel por posicionar todos elementos citados abaixo:
+ * cortadores;
+ * moedas;
+ * princeso.
+ *
+ * Também é responsavél por limpar da tela os elementos citados acima.
  */
 public class TiledMapCreatorBox2d extends Thread {
 
     public static ArrayList<Cortador> cortadores;
     public static ArrayList<Moedas> moedas;
-
     private Princeso princeso;
 
     private Play screen;
@@ -65,27 +70,23 @@ public class TiledMapCreatorBox2d extends Thread {
 
         }
 
-        //CRIA OS CORTADORES
+        //CRIA OS CORTADORES com referencia a terceira camada do Tilemap
         for(MapObject object : tilemap.getLayers().get(3).getObjects().getByType(EllipseMapObject.class) ){
             Ellipse circle = ((EllipseMapObject) object).getEllipse();
 
             cortadores.add(new Cortador(mundo, tilemap, circle, screen));
 
-            //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
-
         }
 
-         //CRIA AS MOEDAS usando como referencia o tilemap
+         //CRIA AS MOEDAS com referencia a 5 camada do Tilemap
          for(MapObject object : tilemap.getLayers().get(5).getObjects().getByType(EllipseMapObject.class) ){
              Ellipse circle = ((EllipseMapObject) object).getEllipse();
 
              moedas.add(new Moedas(mundo, tilemap, circle, screen));
 
-             //Gdx.app.log(RobotGame.TAG, "circle w: " + circle.width + " circle h: " + circle.height);
-
          }
 
-         //Princeso
+         //Princeso no mapa usando o tilemap
          for(MapObject object : tilemap.getLayers().get(4).getObjects().getByType(EllipseMapObject.class) ){
              Ellipse circle = ((EllipseMapObject) object).getEllipse();
 
